@@ -165,7 +165,8 @@ def validateOptImg(opt):
 def validateTexturePath(path):
     # Expand user dir in directories strings
     path = expand_path(path)
-    # TODO assert this path exists?
+    if not os.path.exists(path):
+        raise ValidationException("%r does not exist" % path)
     return path
 
 
@@ -182,9 +183,20 @@ def validateStr(s):
     return str(s)
 
 def validateDimension(d):
-    if d in ["nether", "overworld", "end", "default"]:
-        return d
-    raise ValidationException("%r is not a valid dimension" % d)
+    # returns (original, argument to get_type)
+    
+    # these are provided as arguments to RegionSet.get_type()
+    pretty_names = {
+        "nether": "DIM-1",
+        "overworld": None,
+        "end": "DIM1",
+        "default": 0,
+    }
+    
+    try:
+        return (d, pretty_names[d])
+    except KeyError:
+        return (d, d)
 
 def validateOutputDir(d):
     _, d = checkBadEscape(d)
@@ -226,6 +238,12 @@ def validatePath(p):
     abs_path = expand_path(path)
     if not os.path.exists(abs_path):
         raise ValidationException("'%s' does not exist. Path initially given as '%s'" % (abs_path,p))
+
+def validateManualPOIs(d):
+    for poi in d:
+        if not 'x' in poi or not 'y' in poi or not 'z' in poi or not 'id' in poi:
+            raise ValidationException("Not all POIs have x/y/z coordinates or an id: %r" % poi)
+    return d
 
 def make_dictValidator(keyvalidator, valuevalidator):
     """Compose and return a dict validator -- a validator that validates each
