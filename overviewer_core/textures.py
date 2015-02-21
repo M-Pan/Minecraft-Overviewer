@@ -3868,15 +3868,15 @@ def rp2lampoff(self, blockid, data):
 
 # Project Table
 # needs 4 sides- top, sides, front, bottom (2*16 - 2*16+4)
-@material (blockid=751:3, solid=True, nodata=True)
-def rp2table(self, blockid, data):
-    top = self.redpower_base[2*16]
-    side = self.redpower_base[2*16+1]
-    front = self.redpower_base[2*16+2]
-    bottom = self.redpower_base[2*16+3]
-    img = self.build_full_block(top, side, front, side, side, bottom)
-
-	return img
+#@material (blockid=751, solid=True, data=range())
+#def rp2table(self, blockid, data):
+#    top = self.redpower_base[2*16]
+#   side = self.redpower_base[2*16+1]
+#    front = self.redpower_base[2*16+2]
+#    bottom = self.redpower_base[2*16+3]
+#    img = self.build_full_block(top, side, front, side, side, bottom)
+#
+#	return img
 
 
 	
