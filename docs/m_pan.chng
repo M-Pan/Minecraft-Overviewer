@@ -1,0 +1,40 @@
+base.c
+-Lines: 97 - 98, 131 ; BlockID: 255 ; Redpower2 Rubber Tree Leaves
+
+smooth-lighting.c
+-Lines: 221 ; BlockID: 255 ; Redpower2 Rubber Tree Leaves
+
+lighting.c
+-Lines: 320 : BlockID: 255 ; Redpower2 Rubber Tree Leaves
+
+textures.py
+-Lines:	59 ; 		declare RP2 texture sheets ; lighting1.png base1.png world1.png
+-Lines:	78 - 80 :	load RP2 texture sheets ; redpower_world redpower_base redpower_world
+-Lines:	3824 :		basalt (cobble, stone, brick, chisled, pavers), marble (stone, brick),
+					ores (ruby, green, sapphire, silver, tin, copper, tin, tungsten, nikolite),
+					rubber wood, rubber leaves, storage blocks (copper, tin, silver), basic
+					lamps (on, off, all colors), project table, alloy furnace.
+.
+
+BlockIDs:
+
+Stones - 244
+Ores - 242
+Wood - 245
+Leaves - 255
+Ore Storage - 754
+Lumar Lamps (on) - 756
+Lumar Lamps (off) - 757
+Project Table - 751:3
+Alloy Furnace (off) - 751
+Flax - 
+Flower - 
+Sapling - 
+
+To Do: (blockIDs)
+
+Flax
+Flowers
+rubber saplings 
+caged lamps
+fixture lamps

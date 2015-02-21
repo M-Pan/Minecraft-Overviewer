@@ -56,7 +56,7 @@ class Textures(object):
     def __getstate__(self):
         # we must get rid of the huge image lists, and other images
         attributes = self.__dict__.copy()
-        for attr in ['terrain_images', 'blockmap', 'biome_grass_texture', 'watertexture', 'lavatexture', 'firetexture', 'portaltexture', 'lightcolor', 'grasscolor', 'foliagecolor', 'watercolor']:
+        for attr in ['terrain_images', 'redpower_world', 'redpower_lighting', 'redpower_base', 'blockmap', 'biome_grass_texture', 'watertexture', 'lavatexture', 'firetexture', 'portaltexture', 'lightcolor', 'grasscolor', 'foliagecolor', 'watercolor']:
             try:
                 del attributes[attr]
             except KeyError:
@@ -75,6 +75,9 @@ class Textures(object):
     
     def generate(self):
         # maps terrainids to 16x16 images
+		self.redpower_base = self._split_terrain(self.load_image("base1.png"))
+		self.redpower_lighting = self._split_terrain(self.load_image("lighting1.png"))
+		self.redpower_world = self._split_terrain(self.load_image("world1.png"))
         self.terrain_images = self._split_terrain(self.load_image("terrain.png"))
         
         # generate biome grass mask
@@ -3817,3 +3820,100 @@ def anvil(self, blockid, data):
     alpha_over(img, right_side, right_pos, right_side)
     
     return img
+	
+## RedPower2
+
+# Stone Blocks
+@material (blockid=244, data=range(7), solid=True)
+def rp2stone(self, blockid, data):
+	texture = self.redpower_world[1*16+data]
+	return self.build_block(texture, texture)
+
+# Rubber Leaves
+@material (blockid=255, data=range(1), transparent=True, solid=True)
+def rp2leaves(self, blockid, data):
+	texture = self.redpower_world[3*16+data]
+	return self.build_block(texture, texture)
+
+# Rubber Logs
+@material (blockid=245, data=range(1), solid=True)
+def rp2logs(self, blockid, data):
+	side = self.redpower_world[3*16+2]
+	top  = self.redpower_world[3*16+3]
+	return self.build_block(top, side)
+
+# Ore Blocks
+@material (blockid=242, data=range(8), solid=True)
+def rp2ore(self, blockid, data):
+	texture = self.redpower_world[2*16+data]
+	return self.build_block(texture, texture)
+
+# Storage Blocks
+@material (blockid=754, data=range(6), solid=True)
+def rp2store(self, blockid, data):
+	texture = self.redpower_world[5*16+data]
+	return self.build_block(texture, texture)
+
+# Lamps - On
+@material (blockid=756, data=range(16), solid=True)
+def rp2lampson(self, blockid, data):
+	texture = self.redpower_lighting[2*16+data]
+	return self.build_block(texture, texture)
+
+# Lamps - Off
+@material (blockid=757, data=range(16), solid=True)
+def rp2lampoff(self, blockid, data):
+	texture = self.redpower_lighting[1*16+data]
+	return self.build_block(texture, texture)
+
+# Project Table
+# needs 4 sides- top, sides, front, bottom (2*16 - 2*16+4)
+@material (blockid=751:3, solid=True, nodata=True)
+def rp2table(self, blockid, data):
+    top = self.redpower_base[2*16]
+    side = self.redpower_base[2*16+1]
+    front = self.redpower_base[2*16+2]
+    bottom = self.redpower_base[2*16+3]
+    img = self.build_full_block(top, side, front, side, side, bottom)
+	
+	return img
+
+
+	
+## In Progress Below This Line ##
+	
+# Alloy Furnace (in progress)
+#@material(blockid=[751, 751:1], data=range(6), solid=True)
+#def alloyfurnace(self, blockid, data):
+	# Rotation
+#    if self.rotation == 1:
+#        if data == 2: data = 5
+#        elif data == 3: data = 4
+#        elif data == 4: data = 2
+#        elif data == 5: data = 3
+#    elif self.rotation == 2:
+#        if data == 2: data = 3
+#        elif data == 3: data = 2
+#        elif data == 4: data = 5
+#        elif data == 5: data = 4
+#    elif self.rotation == 3:
+#        if data == 2: data = 4
+#        elif data == 3: data = 5
+#        elif data == 4: data = 3
+#        elif data == 5: data = 2
+#
+#    top = self.redpower_base[1*16+4]
+#    side = self.terrain_images[1*16+1]
+#   
+#    if blockid == [751]: # Off
+#        front = self.redpower_base[1*16+2]
+#    elif blockid == [751:1]: #On
+#        front = self.redpower_base[1*16+3]
+#    
+#    if data == 3: # pointing west
+#        return self.build_full_block(top, None, None, side, front)
+#    elif data == 4: # pointing north
+#        return self.build_full_block(top, None, None, front, side)
+#    else: # in any other direction the front can't be seen
+#        return self.build_full_block(top, None, None, side, side)
+#

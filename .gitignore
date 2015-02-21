@@ -3,7 +3,6 @@ MANIFEST
 build/
 dist/
 Minecraft_Overviewer.egg-info
-terrain.png
 cachedir*
 
 #MCPatcher HD texture files
