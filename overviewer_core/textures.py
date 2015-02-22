@@ -3824,48 +3824,52 @@ def anvil(self, blockid, data):
 ## RedPower2
 
 # Stone Blocks
-@material (blockid=244, data=range(7), solid=True)
+@material(blockid=244, data=range(7), solid=True)
 def rp2stone(self, blockid, data):
     texture = self.redpower_world[1*16+data]
     return self.build_block(texture, texture)
 
 # Rubber Leaves
-@material (blockid=255, data=range(1), transparent=True, solid=True)
+@material(blockid=255, data=range(1), transparent=True, solid=True)
 def rp2leaves(self, blockid, data):
     texture = self.redpower_world[3*16+data]
     return self.build_block(texture, texture)
 
 # Rubber Logs
-@material (blockid=245, data=range(1), solid=True)
+@material(blockid=245, data=range(1), solid=True)
 def rp2logs(self, blockid, data):
     side = self.redpower_world[3*16+2]
     top  = self.redpower_world[3*16+3]
     return self.build_block(top, side)
 
 # Ore Blocks
-@material (blockid=242, data=range(8), solid=True)
+@material(blockid=242, data=range(8), solid=True)
 def rp2ore(self, blockid, data):
     texture = self.redpower_world[2*16+data]
     return self.build_block(texture, texture)
 
 # Storage Blocks
-@material (blockid=754, data=range(6), solid=True)
+@material(blockid=754, data=range(6), solid=True)
 def rp2store(self, blockid, data):
     texture = self.redpower_world[5*16+data]
     return self.build_block(texture, texture)
 
 # Lamps - On
-@material (blockid=756, data=range(16), solid=True)
+@material(blockid=757, data=range(16), solid=True)
 def rp2lampson(self, blockid, data):
     texture = self.redpower_lighting[2*16+data]
     return self.build_block(texture, texture)
 
 # Lamps - Off
-@material (blockid=757, data=range(16), solid=True)
+@material(blockid=758, data=range(16), solid=True)
 def rp2lampoff(self, blockid, data):
     texture = self.redpower_lighting[1*16+data]
     return self.build_block(texture, texture)
-
+##
+##
+## In Progress Below This Line ##
+##
+##
 # Project Table
 # needs 4 sides- top, sides, front, bottom (2*16 - 2*16+4)
 #@material (blockid=751, solid=True, data=range())
@@ -3877,10 +3881,6 @@ def rp2lampoff(self, blockid, data):
 #    img = self.build_full_block(top, side, front, side, side, bottom)
 #
 #	return img
-
-
-	
-## In Progress Below This Line ##
 	
 # Alloy Furnace (in progress)
 #@material(blockid=[751, 751:1], data=range(6), solid=True)
