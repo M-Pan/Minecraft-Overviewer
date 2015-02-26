@@ -3855,13 +3855,13 @@ def rp2store(self, blockid, data):
     return self.build_block(texture, texture)
 
 # Lamps - On
-@material(blockid=757, data=range(16), solid=True)
+@material(blockid=758, data=range(16), solid=True)
 def rp2lampson(self, blockid, data):
     texture = self.redpower_lighting[2*16+data]
     return self.build_block(texture, texture)
 
 # Lamps - Off
-@material(blockid=758, data=range(16), solid=True)
+@material(blockid=757, data=range(16), solid=True)
 def rp2lampoff(self, blockid, data):
     texture = self.redpower_lighting[1*16+data]
     return self.build_block(texture, texture)
