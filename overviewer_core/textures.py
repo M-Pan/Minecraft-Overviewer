@@ -75,7 +75,7 @@ class Textures(object):
     
     def generate(self):
         # maps terrainids to 16x16 images
-		self.redpower_machine = self._split_terrain(self.load_image("rp2_machine.png"))
+        self.redpower_machine = self._split_terrain(self.load_image("rp2_machine.png"))
         self.redpower_base = self._split_terrain(self.load_image("rp2_base.png"))
         self.redpower_lighting = self._split_terrain(self.load_image("rp2_lighting.png"))
         self.redpower_world = self._split_terrain(self.load_image("rp2_world.png"))
