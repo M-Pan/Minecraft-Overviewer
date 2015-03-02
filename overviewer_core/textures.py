@@ -75,9 +75,10 @@ class Textures(object):
     
     def generate(self):
         # maps terrainids to 16x16 images
-        self.redpower_base = self._split_terrain(self.load_image("base1.png"))
-        self.redpower_lighting = self._split_terrain(self.load_image("lighting1.png"))
-        self.redpower_world = self._split_terrain(self.load_image("world1.png"))
+		self.redpower_machine = self._split_terrain(self.load_image("rp2_machine.png"))
+        self.redpower_base = self._split_terrain(self.load_image("rp2_base.png"))
+        self.redpower_lighting = self._split_terrain(self.load_image("rp2_lighting.png"))
+        self.redpower_world = self._split_terrain(self.load_image("rp2_world.png"))
         self.terrain_images = self._split_terrain(self.load_image("terrain.png"))
         
         # generate biome grass mask
@@ -3832,8 +3833,10 @@ def rp2stone(self, blockid, data):
 # Rubber Leaves
 @material(blockid=255, data=range(1), transparent=True, solid=True)
 def rp2leaves(self, blockid, data):
-    texture = self.redpower_world[3*16+data]
-    return self.build_block(texture, texture)
+    if data == 0:
+        side = self.redpower_world[3*16+0]
+        top  = self.redpower_world[3*16+1]
+    return self.build_block(top, side)
 
 # Rubber Logs
 @material(blockid=245, data=range(1), solid=True)
@@ -3870,6 +3873,50 @@ def rp2lampoff(self, blockid, data):
 ## In Progress Below This Line ##
 ##
 ##
+
+# flax
+@material(blockid=246, data=range(6), transparent=True, nospawn=True)
+def rp2flax(self, blockid, data):
+    raw_crop = self.redpower_world[4*16+data]
+    crop1 = self.transform_image_top(raw_crop)
+    crop2 = self.transform_image_side(raw_crop)
+    crop3 = crop2.transpose(Image.FLIP_LEFT_RIGHT)
+
+    img = Image.new("RGBA", (24,24), self.bgcolor)
+    if data < 5: # don't show "floor" texture on top block
+        alpha_over(img, crop1, (0,12), crop1)
+    alpha_over(img, crop2, (6,3), crop2)
+    alpha_over(img, crop3, (6,3), crop3)
+    return img
+
+# base blocks
+@material(blockid=751, data=range(5), solid=True)
+def rp2furnaces(self, blockid, data):
+    # if data == 0: # alloy furnace
+    top   = self.redpower_base[1*16+3]
+    front = self.redpower_base[1*16+1]
+    side  = self.redpower_base[1*16+0]
+
+    if data == 1: # blue furnace
+        top   = self.redpower_machine[5*16+3]
+        front = self.redpower_machine[5*16+1]
+        side  = self.redpower_machine[5*16+0]        
+    elif data == 2: # buffer
+        top   = self.redpower_machine[5*16+9]
+        front = self.redpower_machine[5*16+8]
+        side  = front                
+    elif data == 3: # project table
+        top   = self.redpower_base[2*16+0]
+        front = self.redpower_base[2*16+2]
+        side  = self.redpower_base[2*16+1]
+    elif data == 4: # blue alloy furnace
+        top   = self.redpower_machine[10*16+3]
+        front = self.redpower_machine[10*16+1]
+        side  = self.redpower_machine[10*16+0]        
+    
+    # assume south-pointing position
+    return self.build_full_block(top, None, None, side, front)
+
 # Project Table
 # needs 4 sides- top, sides, front, bottom (2*16 - 2*16+4)
 #@material (blockid=751, solid=True, data=range())
