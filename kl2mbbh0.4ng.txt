@@ -1,0 +1,22 @@
+﻿Revert "Testing More RP2 Tweaks..."
+
+This reverts commit 6544cb1c64ae905d7caed5f0a2c284bf2aeb7d96.
+
+Conflicts:
+	overviewer_core/textures.py
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch working_rp2
+# Your branch is up-to-date with 'origin/working_rp2'.
+#
+# You are currently reverting commit 6544cb1.
+#
+# Changes to be committed:
+	renamed:    overviewer_core/data/textures/rp2_base.png -> overviewer_core/data/textures/base1.png
+	renamed:    overviewer_core/data/textures/rp2_lighting.png -> overviewer_core/data/textures/lighting1.png
+#	deleted:    overviewer_core/data/textures/rp2_machine.png
+	renamed:    overviewer_core/data/textures/rp2_world.png -> overviewer_core/data/textures/world1.png
+	modified:   overviewer_core/textures.py
+#
+
