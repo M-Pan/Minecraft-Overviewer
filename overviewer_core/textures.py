@@ -3870,7 +3870,6 @@ def rp2lampoff(self, blockid, data):
 ## In Progress Below This Line ##
 ##
 ##
-<<<<<<< HEAD
 ##
 # Project Table
 # needs 4 sides- top, sides, front, bottom (2*16 - 2*16+4)
@@ -3918,20 +3917,3 @@ def rp2lampoff(self, blockid, data):
 #        return self.build_full_block(top, None, None, front, side)
 #    else: # in any other direction the front can't be seen
 #        return self.build_full_block(top, None, None, side, side)
-=======
-
-# flax
-@material(blockid=246, data=range(6), transparent=True, nospawn=True)
-def rp2flax(self, blockid, data):
-    raw_crop = self.redpower_world[4*16+data]
-    crop1 = self.transform_image_top(raw_crop)
-    crop2 = self.transform_image_side(raw_crop)
-    crop3 = crop2.transpose(Image.FLIP_LEFT_RIGHT)
-
-    img = Image.new("RGBA", (24,24), self.bgcolor)
-    if data < 5: # don't show "floor" texture on top block
-        alpha_over(img, crop1, (0,12), crop1)
-    alpha_over(img, crop2, (6,3), crop2)
-    alpha_over(img, crop3, (6,3), crop3)
-    return img
->>>>>>> parent of 8eacad7... yep
