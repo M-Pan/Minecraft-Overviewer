@@ -75,16 +75,11 @@ class Textures(object):
     
     def generate(self):
         # maps terrainids to 16x16 images
-<<<<<<< HEAD
-        self.redpower_base = self._split_terrain(self.load_image("base1.png"))
-        self.redpower_lighting = self._split_terrain(self.load_image("lighting1.png"))
-        self.redpower_world = self._split_terrain(self.load_image("world1.png"))
-=======
-		self.redpower_machine = self._split_terrain(self.load_image("rp2_machine.png"))
+        self.redpower_machine = self._split_terrain(self.load_image("rp2_machine1.png"))
+		self.redpower_machine = self._split_terrain(self.load_image("rp2_machine1.png"))
         self.redpower_base = self._split_terrain(self.load_image("rp2_base.png"))
         self.redpower_lighting = self._split_terrain(self.load_image("rp2_lighting.png"))
         self.redpower_world = self._split_terrain(self.load_image("rp2_world.png"))
->>>>>>> parent of e2a3d78... stupit indents
         self.terrain_images = self._split_terrain(self.load_image("terrain.png"))
         
         # generate biome grass mask
