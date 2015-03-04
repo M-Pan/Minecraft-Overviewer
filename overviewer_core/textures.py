@@ -75,10 +75,9 @@ class Textures(object):
     
     def generate(self):
         # maps terrainids to 16x16 images
-        self.redpower_machine = self._split_terrain(self.load_image("rp2_machine.png"))
-        self.redpower_base = self._split_terrain(self.load_image("rp2_base.png"))
-        self.redpower_lighting = self._split_terrain(self.load_image("rp2_lighting.png"))
-        self.redpower_world = self._split_terrain(self.load_image("rp2_world.png"))
+        self.redpower_base = self._split_terrain(self.load_image("base1.png"))
+        self.redpower_lighting = self._split_terrain(self.load_image("lighting1.png"))
+        self.redpower_world = self._split_terrain(self.load_image("world1.png"))
         self.terrain_images = self._split_terrain(self.load_image("terrain.png"))
         
         # generate biome grass mask
@@ -3833,10 +3832,8 @@ def rp2stone(self, blockid, data):
 # Rubber Leaves
 @material(blockid=255, data=range(1), transparent=True, solid=True)
 def rp2leaves(self, blockid, data):
-    if data == 0:
-        side = self.redpower_world[3*16+0]
-        top  = self.redpower_world[3*16+1]
-    return self.build_block(top, side)
+    texture = self.redpower_world[3*16+data]
+    return self.build_block(texture, texture)
 
 # Rubber Logs
 @material(blockid=245, data=range(1), solid=True)
@@ -3873,3 +3870,50 @@ def rp2lampoff(self, blockid, data):
 ## In Progress Below This Line ##
 ##
 ##
+##
+# Project Table
+# needs 4 sides- top, sides, front, bottom (2*16 - 2*16+4)
+#@material (blockid=751, solid=True, data=range())
+#def rp2table(self, blockid, data):
+#    top = self.redpower_base[2*16]
+#   side = self.redpower_base[2*16+1]
+#    front = self.redpower_base[2*16+2]
+#    bottom = self.redpower_base[2*16+3]
+#    img = self.build_full_block(top, side, front, side, side, bottom)
+#
+#	return img
+	
+# Alloy Furnace (in progress)
+#@material(blockid=[751, 751:1], data=range(6), solid=True)
+#def alloyfurnace(self, blockid, data):
+	# Rotation
+#    if self.rotation == 1:
+#        if data == 2: data = 5
+#        elif data == 3: data = 4
+#        elif data == 4: data = 2
+#        elif data == 5: data = 3
+#    elif self.rotation == 2:
+#        if data == 2: data = 3
+#        elif data == 3: data = 2
+#        elif data == 4: data = 5
+#        elif data == 5: data = 4
+#    elif self.rotation == 3:
+#        if data == 2: data = 4
+#        elif data == 3: data = 5
+#        elif data == 4: data = 3
+#        elif data == 5: data = 2
+#
+#    top = self.redpower_base[1*16+4]
+#    side = self.terrain_images[1*16+1]
+#   
+#    if blockid == [751]: # Off
+#        front = self.redpower_base[1*16+2]
+#    elif blockid == [751:1]: #On
+#        front = self.redpower_base[1*16+3]
+#    
+#    if data == 3: # pointing west
+#        return self.build_full_block(top, None, None, side, front)
+#    elif data == 4: # pointing north
+#        return self.build_full_block(top, None, None, front, side)
+#    else: # in any other direction the front can't be seen
+#        return self.build_full_block(top, None, None, side, side)
